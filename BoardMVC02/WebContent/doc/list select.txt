@@ -1,0 +1,40 @@
+select b.*
+from (
+    select rownum rn, a.*
+    from (
+        select b.seq, b.name, b.id, b.email,
+               b.subject, b.content, b.hit,
+               decode(trunc(b.logtime, 'dd'),
+                      trunc(sysdate, 'dd'), to_char(logtime, 'hh24:mi:ss'),
+                      to_char(logtime, 'yy.mm.dd')) as logtime, 
+               b.bcode, r.rseq,
+               r.ref, r.lev, r.step, r.pseq, r.reply
+        from board b, reboard r
+        where b.seq=r.seq
+        and b.bcode=3
+        order by ref desc, step
+        ) a
+    where rownum <= 20
+    ) b
+where b.rn > 0 
+
+
+sb.append("select b.* \n");
+sb.append("from ( \n");
+sb.append("    select rownum rn, a.* \n");
+sb.append("    from ( \n");
+sb.append("        select b.seq, b.name, b.id, b.email, \n");
+sb.append("               b.subject, b.content, b.hit, \n");
+sb.append("               decode(trunc(b.logtime, 'dd'), \n");
+sb.append("                      trunc(sysdate, 'dd'), to_char(logtime, 'hh24:mi:ss'), \n");
+sb.append("                      to_char(logtime, 'yy.mm.dd')) as logtime,  \n");
+sb.append("               b.bcode, r.rseq, \n");
+sb.append("               r.ref, r.lev, r.step, r.pseq, r.reply \n");
+sb.append("        from board b, reboard r \n");
+sb.append("        where b.seq=r.seq \n");
+sb.append("        and b.bcode=? \n");
+sb.append("        order by ref desc, step \n");
+sb.append("        ) a \n");
+sb.append("    where rownum <= ? \n");
+sb.append("    ) b \n");
+sb.append("where b.rn > ? \n");

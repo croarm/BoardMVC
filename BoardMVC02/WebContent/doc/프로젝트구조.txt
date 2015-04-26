@@ -1,0 +1,50 @@
+boardmvc
+  src
+    com.sunmoon.board.controller
+      ReboardController.java (servlet : reboard)
+    
+    com.sunmoon.board.model
+      ReboardDao.java       
+      ReboardService.java (interface)
+      ReboardServiceImpl.java
+      
+      BoardTypeDto.java
+      BoardCategoryDto.java
+      BoardKindDto.java
+      BoardDto.java
+      ReboardDto.java
+      AlbumDto.java
+      BbsDto.java
+      MemoDto.java
+ 
+      
+    
+    com.sunmoon.board.util
+      Encoder.java
+      UrlFormat.java
+      StringCheck.java
+      PageConstant.java
+      PageNavigation.java
+    
+    com.sunmoon.board.util.db
+      DBConnection.java
+      DBClose.java
+  
+  webContent
+    board
+      write.jsp
+      writeOk.jsp
+      writeFail.jsp
+      list.jsp
+      view.jsp
+      reply.jsp
+      modify.jsp
+      delete.jsp.....
+    
+    img : image file
+    
+    css : style sheet file
+    
+    js : javascript file
+    
+    index.jsp
